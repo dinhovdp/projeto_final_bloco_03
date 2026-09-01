@@ -34,6 +34,8 @@ function Navbar() {
         <nav className="hidden items-center gap-4 text-base font-medium md:flex lg:gap-6">
           <Link to="/categorias" className="transition hover:text-slate-200">Categorias</Link>
           <Link to="/cadastrar-categoria" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
+          <Link to="/produtos" className="transition hover:text-slate-200">Produtos</Link>
+          <Link to="/cadastrar-produto" className="transition hover:text-slate-200">Cadastrar Produto</Link>
           <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
             <User size={24} weight="bold" />
           </button>

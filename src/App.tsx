@@ -15,6 +15,8 @@ export function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/categorias" element={<div>Página de Categorias</div>} />
             <Route path="/cadastrar-categoria" element={<div>Página de Cadastro de Categoria</div>} />
+            <Route path="/editar-categoria/:id" element={<div>Página de Edição de Categoria</div>} />
+            <Route path="/deletar-categoria/:id" element={<div>Página de Deleção de Categoria</div>} />
           </Routes>
         </main>
         <Footer />
