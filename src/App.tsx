@@ -13,6 +13,8 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/categorias" element={<div>Página de Categorias</div>} />
+            <Route path="/cadastrar-categoria" element={<div>Página de Cadastro de Categoria</div>} />
           </Routes>
         </main>
         <Footer />

@@ -6,12 +6,11 @@ function Navbar() {
     <header className="w-full bg-[#1d2e83] text-white">
       <div className="mx-auto flex w-full max-w-none items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-10 xl:px-14">
         <Link to="/" className="flex items-center gap-3 shrink-0">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-[#f6424b] shadow-md">
-            <div className="relative h-5 w-5">
-              <div className="absolute left-1/2 top-0 h-full w-1.5 -translate-x-1/2 rounded-full bg-white" />
-              <div className="absolute left-0 top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-white" />
-            </div>
-          </div>
+          <img
+            src="https://ik.imagekit.io/dinhovdp/produtos_farmacia/farma.png"
+            alt="Logo da Farmácia"
+            className="h-9 w-9 object-contain"
+          />
           <span className="text-2xl font-black uppercase tracking-tight sm:text-3xl">FARMÁCIA</span>
         </Link>
 
@@ -33,8 +32,8 @@ function Navbar() {
         </div>
 
         <nav className="hidden items-center gap-4 text-base font-medium md:flex lg:gap-6">
-          <Link to="/" className="transition hover:text-slate-200">Categorias</Link>
-          <Link to="/" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
+          <Link to="/categorias" className="transition hover:text-slate-200">Categorias</Link>
+          <Link to="/cadastrar-categoria" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
           <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
             <User size={24} weight="bold" />
           </button>
