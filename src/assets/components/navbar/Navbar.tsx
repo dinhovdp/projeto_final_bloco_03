@@ -5,7 +5,8 @@ function Navbar() {
   return (
     <header className="w-full bg-[#1d2e83] text-white">
       <div className="mx-auto flex w-full max-w-none items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-10 xl:px-14">
-        <Link to="/" className="flex items-center gap-3 shrink-0">
+        {/* logo e nome ficam dentro do mesmo link, senao duplica o direcionamento pra home */}
+        <Link to="/" className="flex shrink-0 items-center gap-3">
           <img
             src="https://ik.imagekit.io/dinhovdp/produtos_farmacia/farma.png"
             alt="Logo da Farmácia"
@@ -34,8 +35,6 @@ function Navbar() {
         <nav className="hidden items-center gap-4 text-base font-medium md:flex lg:gap-6">
           <Link to="/categorias" className="transition hover:text-slate-200">Categorias</Link>
           <Link to="/cadastrar-categoria" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
-          <Link to="/produtos" className="transition hover:text-slate-200">Produtos</Link>
-          <Link to="/cadastrar-produto" className="transition hover:text-slate-200">Cadastrar Produto</Link>
           <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
             <User size={24} weight="bold" />
           </button>

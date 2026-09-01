@@ -9,6 +9,11 @@ export const buscarCategorias = async () => {
   return await api.get<Categoria[]>("/categorias");
 };
 
+// busca uma categoria unica, usado no form de edicao e na tela de deletar
+export const buscarCategoriaPorId = async (id: number) => {
+  return await api.get<Categoria>(`/categorias/${id}`);
+};
+
 export const cadastrarCategoria = async (categoria: Categoria) => {
   return await api.post<Categoria>("/categorias", categoria);
 };
