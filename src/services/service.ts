@@ -2,7 +2,7 @@ import axios from "axios";
 import type { Categoria, Produto } from "../models";
 
 const api = axios.create({
-  baseURL: "https://farmacia-jk1x.onrender.com",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export const buscarCategorias = async () => {
