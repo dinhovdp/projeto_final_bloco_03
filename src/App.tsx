@@ -15,10 +15,12 @@ import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 export function App() {
   return (
     <CarrinhoProvider>
-      <div className="min-h-screen w-full bg-[#bfe5ec]">
+        {/* ALTERAÇÃO 1: Adicionado 'flex flex-col' para ativar o layout em coluna */}
+      <div className="flex min-h-screen w-full flex-col bg-[#bfe5ec]">
         <BrowserRouter>
           <Navbar />
-          <main className="w-full">
+          {/* ALTERAÇÃO 2: Trocado 'w-full' por 'flex-1' para expandir o conteúdo principal */}
+          <main className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />

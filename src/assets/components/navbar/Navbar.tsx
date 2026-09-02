@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCarrinho } from "../../../contexts/CarrinhoContext";
 
-// cole aqui os links das imagens dos icones (mesmo esquema da logo acima)
-const ICONE_PERFIL_URL = "COLE_AQUI_O_LINK_DA_IMAGEM_DO_ICONE_PERFIL";
-const ICONE_CARRINHO_URL = "COLE_AQUI_O_LINK_DA_IMAGEM_DO_ICONE_CARRINHO";
+//imagens dos icones
+const ICONE_PERFIL_URL = "https://ik.imagekit.io/dinhovdp/produtos_farmacia/user.png";
+const ICONE_CARRINHO_URL = "https://ik.imagekit.io/dinhovdp/produtos_farmacia/carrinhobuy.png";
 
 function Navbar() {
   const { quantidadeTotal } = useCarrinho();
@@ -55,15 +55,17 @@ function Navbar() {
 
           {/* perfil e carrinho ficam sempre visiveis, em qualquer tamanho de tela */}
           <button type="button" className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
-            <img src={ICONE_PERFIL_URL} alt="Perfil" className="h-6 w-6 object-contain" />
+            <img src={ICONE_PERFIL_URL} alt="Perfil" className="h-full w-full object-cover" />
           </button>
           <Link
             to="/carrinho"
             onClick={fecharMenu}
-            className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/60 transition hover:bg-white/10"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10"
             aria-label="Carrinho"
           >
-            <img src={ICONE_CARRINHO_URL} alt="Carrinho" className="h-6 w-6 object-contain" />
+            <span className="flex h-full w-full items-center justify-center overflow-hidden rounded-full">
+              <img src={ICONE_CARRINHO_URL} alt="Carrinho" className="h-full w-full object-cover" />
+            </span>
             {quantidadeTotal > 0 && (
               <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold text-white">
                 {quantidadeTotal}
