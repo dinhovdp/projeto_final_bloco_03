@@ -10,6 +10,7 @@ import ListaProdutos from "./assets/pages/produtos/ListaProdutos";
 import FormProduto from "./assets/pages/produtos/FormProduto";
 import DeletarProduto from "./assets/pages/produtos/DeletarProduto";
 import Carrinho from "./assets/pages/carrinho/Carrinho";
+import Busca from "./assets/pages/busca/Busca";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 
 export function App() {
@@ -24,6 +25,7 @@ export function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/busca" element={<Busca />} />
               <Route path="/categorias" element={<ListaCategorias />} />
               <Route path="/cadastrar-categoria" element={<FormCategoria />} />
               <Route path="/editar-categoria/:id" element={<FormCategoria />} />

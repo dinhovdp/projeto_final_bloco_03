@@ -1,18 +1,30 @@
+import { useState, type FormEvent } from "react";
 import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCarrinho } from "../../../contexts/CarrinhoContext";
 
-//imagens dos icones
+// cole aqui os links das imagens dos icones (mesmo esquema da logo acima)
 const ICONE_PERFIL_URL = "https://ik.imagekit.io/dinhovdp/produtos_farmacia/user.png";
-const ICONE_CARRINHO_URL = "https://ik.imagekit.io/dinhovdp/produtos_farmacia/carrinhobuy.png";
+const ICONE_CARRINHO_URL = "https://ik.imagekit.io/dinhovdp/produtos_farmacia/carrinho.png?updatedAt=1788309546536";
 
 function Navbar() {
   const { quantidadeTotal } = useCarrinho();
   const [menuAberto, setMenuAberto] = useState(false);
+  const [termoBusca, setTermoBusca] = useState("");
+  const navigate = useNavigate();
 
   function fecharMenu() {
     setMenuAberto(false);
+  }
+
+  // manda pra pagina de resultados com o termo digitado, tanto na busca
+  // de cima (desktop) quanto na de dentro do menu mobile
+  function pesquisar(evento: FormEvent<HTMLFormElement>) {
+    evento.preventDefault();
+    const termo = termoBusca.trim();
+    if (termo === "") return;
+    navigate(`/busca?q=${encodeURIComponent(termo)}`);
+    fecharMenu();
   }
 
   return (
@@ -29,20 +41,25 @@ function Navbar() {
         </Link>
 
         <div className="hidden flex-1 justify-center px-3 md:flex">
-          <div className="flex w-full max-w-[430px] items-center rounded-xl border border-white/80 bg-white px-3 py-2 shadow-sm">
+          <form
+            onSubmit={pesquisar}
+            className="flex w-full max-w-[430px] items-center rounded-xl border border-white/80 bg-white px-3 py-2 shadow-sm"
+          >
             <input
               type="text"
-              placeholder="Procurar"
+              value={termoBusca}
+              onChange={(evento) => setTermoBusca(evento.target.value)}
+              placeholder="Procurar produtos ou categorias"
               className="w-full border-0 bg-transparent text-base text-slate-700 placeholder:text-slate-400 focus:outline-none"
             />
             <button
-              type="button"
+              type="submit"
               className="ml-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1d2e83] text-white transition hover:brightness-110"
               aria-label="Buscar"
             >
               <MagnifyingGlass size={20} weight="bold" />
             </button>
-          </div>
+          </form>
         </div>
 
         <div className="flex items-center gap-3">
@@ -88,20 +105,25 @@ function Navbar() {
       {/* painel do menu mobile: so existe abaixo do md, e some acima disso mesmo se ficar aberto */}
       {menuAberto && (
         <div className="flex flex-col gap-3 border-t border-white/20 px-4 py-4 sm:px-6 md:hidden">
-          <div className="flex w-full items-center rounded-xl border border-white/80 bg-white px-3 py-2 shadow-sm">
+          <form
+            onSubmit={pesquisar}
+            className="flex w-full items-center rounded-xl border border-white/80 bg-white px-3 py-2 shadow-sm"
+          >
             <input
               type="text"
-              placeholder="Procurar"
+              value={termoBusca}
+              onChange={(evento) => setTermoBusca(evento.target.value)}
+              placeholder="Procurar produtos ou categorias"
               className="w-full border-0 bg-transparent text-base text-slate-700 placeholder:text-slate-400 focus:outline-none"
             />
             <button
-              type="button"
+              type="submit"
               className="ml-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1d2e83] text-white transition hover:brightness-110"
               aria-label="Buscar"
             >
               <MagnifyingGlass size={20} weight="bold" />
             </button>
-          </div>
+          </form>
 
           <Link to="/categorias" onClick={fecharMenu} className="py-1 text-base font-medium transition hover:text-slate-200">
             Categorias
