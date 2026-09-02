@@ -1,12 +1,25 @@
-import { MagnifyingGlass, ShoppingCart, User } from "@phosphor-icons/react";
+import { useState } from "react";
+import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
+import { useCarrinho } from "../../../contexts/CarrinhoContext";
+
+// cole aqui os links das imagens dos icones (mesmo esquema da logo acima)
+const ICONE_PERFIL_URL = "COLE_AQUI_O_LINK_DA_IMAGEM_DO_ICONE_PERFIL";
+const ICONE_CARRINHO_URL = "COLE_AQUI_O_LINK_DA_IMAGEM_DO_ICONE_CARRINHO";
 
 function Navbar() {
+  const { quantidadeTotal } = useCarrinho();
+  const [menuAberto, setMenuAberto] = useState(false);
+
+  function fecharMenu() {
+    setMenuAberto(false);
+  }
+
   return (
     <header className="w-full bg-[#1d2e83] text-white">
       <div className="mx-auto flex w-full max-w-none items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-10 xl:px-14">
         {/* logo e nome ficam dentro do mesmo link, senao duplica o direcionamento pra home */}
-        <Link to="/" className="flex shrink-0 items-center gap-3">
+        <Link to="/" className="flex shrink-0 items-center gap-3" onClick={fecharMenu}>
           <img
             src="https://ik.imagekit.io/dinhovdp/produtos_farmacia/farma.png"
             alt="Logo da Farmácia"
@@ -32,17 +45,73 @@ function Navbar() {
           </div>
         </div>
 
-        <nav className="hidden items-center gap-4 text-base font-medium md:flex lg:gap-6">
-          <Link to="/categorias" className="transition hover:text-slate-200">Categorias</Link>
-          <Link to="/cadastrar-categoria" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
-          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
-            <User size={24} weight="bold" />
+        <div className="flex items-center gap-3">
+          {/* links de texto: so aparecem na barra a partir do md, no celular vao pro menu de baixo */}
+          <nav className="hidden items-center gap-4 text-base font-medium lg:gap-6 md:flex">
+            <Link to="/categorias" className="transition hover:text-slate-200">Categorias</Link>
+            <Link to="/cadastrar-categoria" className="transition hover:text-slate-200">Cadastrar Categoria</Link>
+            <Link to="/produtos" className="transition hover:text-slate-200">Produtos</Link>
+          </nav>
+
+          {/* perfil e carrinho ficam sempre visiveis, em qualquer tamanho de tela */}
+          <button type="button" className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Perfil">
+            <img src={ICONE_PERFIL_URL} alt="Perfil" className="h-6 w-6 object-contain" />
           </button>
-          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10" aria-label="Carrinho">
-            <ShoppingCart size={24} weight="bold" />
+          <Link
+            to="/carrinho"
+            onClick={fecharMenu}
+            className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/60 transition hover:bg-white/10"
+            aria-label="Carrinho"
+          >
+            <img src={ICONE_CARRINHO_URL} alt="Carrinho" className="h-6 w-6 object-contain" />
+            {quantidadeTotal > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold text-white">
+                {quantidadeTotal}
+              </span>
+            )}
+          </Link>
+
+          {/* botao hamburguer: so aparece abaixo do md, alterna o menu de baixo */}
+          <button
+            type="button"
+            onClick={() => setMenuAberto((aberto) => !aberto)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 transition hover:bg-white/10 md:hidden"
+            aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
+          >
+            {menuAberto ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
           </button>
-        </nav>
+        </div>
       </div>
+
+      {/* painel do menu mobile: so existe abaixo do md, e some acima disso mesmo se ficar aberto */}
+      {menuAberto && (
+        <div className="flex flex-col gap-3 border-t border-white/20 px-4 py-4 sm:px-6 md:hidden">
+          <div className="flex w-full items-center rounded-xl border border-white/80 bg-white px-3 py-2 shadow-sm">
+            <input
+              type="text"
+              placeholder="Procurar"
+              className="w-full border-0 bg-transparent text-base text-slate-700 placeholder:text-slate-400 focus:outline-none"
+            />
+            <button
+              type="button"
+              className="ml-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1d2e83] text-white transition hover:brightness-110"
+              aria-label="Buscar"
+            >
+              <MagnifyingGlass size={20} weight="bold" />
+            </button>
+          </div>
+
+          <Link to="/categorias" onClick={fecharMenu} className="py-1 text-base font-medium transition hover:text-slate-200">
+            Categorias
+          </Link>
+          <Link to="/cadastrar-categoria" onClick={fecharMenu} className="py-1 text-base font-medium transition hover:text-slate-200">
+            Cadastrar Categoria
+          </Link>
+          <Link to="/produtos" onClick={fecharMenu} className="py-1 text-base font-medium transition hover:text-slate-200">
+            Produtos
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

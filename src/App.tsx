@@ -6,25 +6,37 @@ import Home from "./assets/pages/home/Home";
 import ListaCategorias from "./assets/pages/categorias/ListaCategorias";
 import FormCategoria from "./assets/pages/categorias/FormCategoria";
 import DeletarCategoria from "./assets/pages/categorias/DeletarCategoria";
+import ListaProdutos from "./assets/pages/produtos/ListaProdutos";
+import FormProduto from "./assets/pages/produtos/FormProduto";
+import DeletarProduto from "./assets/pages/produtos/DeletarProduto";
+import Carrinho from "./assets/pages/carrinho/Carrinho";
+import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 
 export function App() {
   return (
-    <div className="min-h-screen w-full bg-[#bfe5ec]">
-      <BrowserRouter>
-        <Navbar />
-        <main className="w-full">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/categorias" element={<ListaCategorias />} />
-            <Route path="/cadastrar-categoria" element={<FormCategoria />} />
-            <Route path="/editar-categoria/:id" element={<FormCategoria />} />
-            <Route path="/deletar-categoria/:id" element={<DeletarCategoria />} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <CarrinhoProvider>
+      <div className="min-h-screen w-full bg-[#bfe5ec]">
+        <BrowserRouter>
+          <Navbar />
+          <main className="w-full">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/categorias" element={<ListaCategorias />} />
+              <Route path="/cadastrar-categoria" element={<FormCategoria />} />
+              <Route path="/editar-categoria/:id" element={<FormCategoria />} />
+              <Route path="/deletar-categoria/:id" element={<DeletarCategoria />} />
+              <Route path="/produtos" element={<ListaProdutos />} />
+              <Route path="/cadastrar-produto" element={<FormProduto />} />
+              <Route path="/editar-produto/:id" element={<FormProduto />} />
+              <Route path="/deletar-produto/:id" element={<DeletarProduto />} />
+              <Route path="/carrinho" element={<Carrinho />} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </CarrinhoProvider>
   );
 }
 

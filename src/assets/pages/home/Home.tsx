@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <section className="w-full bg-[#bde3ed] px-4 py-10 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
@@ -10,12 +12,12 @@ function Home() {
             Aqui você encontra <span className="font-bold">Medicamentos e Cosméticos!</span>
           </p>
 
-          <button
-            type="button"
+          <Link
+            to="/cadastrar-produto"
             className="mt-8 rounded-xl border border-[#1d2e83] bg-[#1d2e83] px-6 py-3 text-base font-semibold text-white shadow-md transition hover:brightness-110 sm:text-lg"
           >
             Cadastrar Produto
-          </button>
+          </Link>
         </div>
 
         <div className="order-1 flex justify-center md:order-2 md:justify-end">

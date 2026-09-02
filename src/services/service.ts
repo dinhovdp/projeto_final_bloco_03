@@ -30,6 +30,11 @@ export const buscarProdutos = async () => {
   return await api.get<Produto[]>("/produtos");
 };
 
+// busca um produto unico, usado no form de edicao e na tela de deletar
+export const buscarProdutoPorId = async (id: number) => {
+  return await api.get<Produto>(`/produtos/${id}`);
+};
+
 export const cadastrarProduto = async (produto: Produto) => {
   return await api.post<Produto>("/produtos", produto);
 };
